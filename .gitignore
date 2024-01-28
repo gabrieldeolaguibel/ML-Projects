@@ -1,5 +1,1 @@
-# add .DS_Store to ingnore it in all subfolders
-find . -type d -mindepth 1 -maxdepth 1 -exec sh -c '(cd {} && echo ".DS_Store" >> .gitignore)' ';'
-echo ".DS_Store" >> .gitignore
-
-
+.DS_Store
