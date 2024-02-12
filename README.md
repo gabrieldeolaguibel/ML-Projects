@@ -1,2 +1,2 @@
 # Statistical-Learning-and-Prediction
-Work from the class
+Work from the class.
