@@ -1,0 +1,9 @@
+
+path: /Users/gabrieldeolaguibel/IE/DevOps_Assignement1/Statistical-Learning-and-Prediction/assignments/practical_session6/data # set root
+train: images/train # relative to 'path'
+val: images/val
+
+# Classes
+names:
+  0: Sleeper
+  1: Clips
