@@ -1,5 +1,5 @@
 
-path: /Users/gabrieldeolaguibel/IE/DevOps_Assignement1/Statistical-Learning-and-Prediction/assignments/practical_session6/data # set root
+path: /Users/gabrieldeolaguibel/IE/DevOps_Assignement1/Statistical-Learning-and-Prediction/assignments/practical_session6/data # Requires absokute path: Adrian change as needed to run locally
 train: images/train # relative to 'path'
 val: images/val
 
