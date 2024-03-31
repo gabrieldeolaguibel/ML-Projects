@@ -1,0 +1,7 @@
+numpy
+matplotlib==3.2.1
+seaborn==0.10.0
+sklearn==0.0
+tensorboard>=2.2.0
+tqdm
+syft==0.2.5
