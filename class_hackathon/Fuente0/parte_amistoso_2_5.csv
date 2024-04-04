@@ -1,0 +1,308 @@
+,Unnamed: 0,campo,x,y,w,h,text
+0,0,fecha,42,106,131,21,6/10/2004
+1,1,hora,224,104,79,23,03:41
+2,2,localizacion pais,352,108,99,16,Lituania
+3,3,danos_materiales objetos si,378,191,0,0, 
+4,4,danos_materiales vehículos no,89,189,16,13,X
+5,5,lugar,453,105,149,18,Peraleda De La Mata
+6,6,victimas si,848,109,14,15,X
+7,7,testigos,436,152,265,26,"Daniel Marcos, 6544410295"
+8,8,A asegurado nombre,118,282,99,19,Emilio
+9,9,A asegurado apellidos,115,306,142,23,Benito
+10,10,A asegurado direccion,118,338,210,21,C/ Conde 26
+11,11,A asegurado codigo_postal,143,365,64,18,6573
+12,12,A asegurado pais,275,363,63,13,Espana
+13,13,A asegurado telefono,151,394,151,21,6804673474
+14,14,A  vehiculo marca_modelo,54,500,103,12,Toyota Latitude
+15,15,A  vehiculo matricula,53,536,37,14,188Cze
+16,16,A  vehiculo pais,53,573,44,10,Espana
+17,17,A  remolque matricula,253,534,66,14,4831Iie
+18,18,A  remolque pais,256,570,77,16,Suecia
+19,19,A  aseguradora_nombre,118,623,203,24,E Ese Salud
+20,20,A  aseguradora num_poliza,138,655,60,15,1518
+21,21,A  aseguradora carta_verde,175,677,73,19,91085
+22,22,A  aseguradora carta_verde_desde,282,722,64,21,4/33
+23,23,A  aseguradora carta_verde_hasta,372,724,68,18,7/32
+24,24,A  aseguradora agencia,233,753,112,15,Langa De Duero
+25,25,A  aseguradora agencia nombre,110,772,72,17,Maria Mar
+26,26,A  aseguradora agencia direccion,118,795,206,20,C/ Hurtado 50
+27,27,A  aseguradora pais,275,819,58,19,Suiza
+28,28,A  aseguradora telefono,155,850,152,20,6799934244
+29,29,A  aseguradora danos_propios_no,155,901,0,0, 
+30,30,A  conductor nombre,122,942,133,19,Ana Belen
+31,31,A  conductor apellidos,122,969,136,19,Caballero
+32,32,A  conductor fecha_nac,195,991,153,23,5/12/1950
+33,33,A  conductor direccion,122,1020,180,17,Calle Acosta 28
+34,34,A  conductor pais,276,1043,64,14,Espana
+35,35,A  conductor telefono,149,1072,228,18,Alonso.Nuria@Outlook.Es
+36,36,A  conductor permiso,215,1103,72,13,46073093Q
+37,37,A  conductor categoria,196,1125,42,18,A2
+38,38,A  conductor valido_hasta,193,1151,139,19,20/11/2016
+39,39,A  conductor danos_apreciados,46,1433,127,16,Maricula Estropeado
+40,40,B asegurado nombre,844,282,47,19,Eva
+41,41,B asegurado apellidos,841,308,69,20,Estevez
+42,42,B asegurado direccion,844,334,151,21,C/ Flores 94
+43,43,B asegurado codigo_postal,865,361,70,23,19407
+44,44,B asegurado pais,998,360,74,19,Espana
+45,45,B asegurado telefono,870,391,290,27,Suarez.Amparo@Hotmail.Es
+46,46,B vehiculo marca_modelo,774,501,117,19,Ducati Stype
+47,47,B vehiculo matricula,773,541,51,13,1453Rrp
+48,48,B vehiculo pais,775,573,86,15,Lituania
+49,49,B remolque pais,974,572,52,11,Espana
+50,50,B remolque matricula,974,537,51,12,352Xpc
+51,51,B aseguradora_nombre,842,627,46,16,Mussap
+52,52,B aseguradora n_poliza,862,650,57,16,6306
+53,53,B aseguradora carta_verde,899,673,72,19,61130
+54,54,B aseguradora carta_verde_desde,1004,728,52,14,2/21
+55,55,B aseguradora carta_verde_hasta,1095,726,59,17,10/2
+56,56,B aseguradora agencia,958,750,48,15,Tous
+57,57,B aseguradora agencia nombre,835,771,38,17,Juana
+58,58,B aseguradora agencia direccion,841,796,180,16,Calle Alarcon 74
+59,59,B aseguradora agencia pais,993,818,99,18,Lituania
+60,60,B aseguradora telefono,873,845,172,22,6733162997
+61,61,B aseguradora danos_propios no,880,900,11,8,X
+62,62,B aseguradora danos_propios si,977,899,0,0, 
+63,63,B conductor nombre,840,943,54,17,Martina
+64,64,B conductor apellidos,840,968,59,18,Roman
+65,65,B conductor fecha_nac,908,992,127,21,29/11/1979
+66,66,B conductor direccion,844,1017,177,22,C/ Dominguez 23
+67,67,B conductor pais,994,1045,62,17,Eeuu
+68,68,B conductor telefono,872,1074,171,19,Gallego.Juana@Outlook.Com
+69,69,B conductor permiso,935,1098,116,16,18488285D
+70,70,B conductor categoria,919,1123,38,18,A2
+71,71,B conductor valido_hasta,911,1149,133,16,18/3/2027
+72,72,B danos_apreciados,982,1433,142,9,Econometro Estropeado
+73,73,victimas no,751,113,11,8,X
+74,74,danos_materiales objetos no,276,191,0,0, 
+75,75,danos_materiales vehiculos si,191,190,9,10,X
+76,76,A 1,448,327,17,18,X
+77,77,A 2,446,355,0,0, 
+78,78,A 3,448,398,0,0, 
+79,79,A 4,448,427,18,15,X
+80,80,A 5,448,479,0,0, 
+81,81,A 6,450,524,14,10,X
+82,82,A 7,448,573,0,0, 
+83,83,A 8,448,621,0,0, 
+84,84,A 9,448,677,16,18,X
+85,85,A 10,448,732,0,0, 
+86,86,A 11,449,759,14,15,X
+87,87,A 12,448,793,16,13,X
+88,88,A 13,448,831,0,0, 
+89,89,A 14,450,859,0,0, 
+90,90,A 15,446,894,0,0, 
+91,91,A 16,448,942,0,0, 
+92,92,A 17,445,990,0,0, 
+93,93,A n_casillas,448,1040,0,0, 
+94,94,B n_casillas,728,1038,0,0, 
+95,95,B 17,732,980,18,20,X
+96,96,B 16,733,935,22,18,X
+97,97,B 15,731,896,0,0, 
+98,98,B 14,733,855,16,15,X
+99,99,B 13,732,834,0,0, 
+100,100,B 12,732,798,0,0, 
+101,101,B 11,732,756,16,18,X
+102,102,B 10,730,734,0,0, 
+103,103,B 9,731,687,0,0, 
+104,104,B 8,733,617,14,16,X
+105,105,B 7,730,571,20,15,X
+106,106,B 6,732,519,16,18,X
+107,107,B 5,731,474,20,15,X
+108,108,B 4,734,425,16,18,X
+109,109,B 3,731,397,0,0, 
+110,110,B 2,730,356,0,0, 
+111,111,B 1,733,329,12,13,X
+112,112,A  aseguradora danos_propios_si,255,899,0,0, 
+113,113,texto maquina,41,45,631,27,
+114,114,texto maquina,44,83,162,17,
+115,115,texto maquina,224,80,40,20,
+116,116,texto maquina,321,80,114,21,
+117,117,texto maquina,456,82,43,16,
+118,118,texto maquina,321,105,31,18,
+119,119,texto maquina,686,81,186,16,
+120,120,texto maquina,731,109,21,16,
+121,121,texto maquina,832,108,20,16,
+122,122,texto maquina,43,134,142,19,
+123,123,texto maquina,437,134,240,21,
+124,124,texto maquina,42,158,375,17,
+125,125,texto maquina,65,186,24,18,
+126,126,texto maquina,170,180,19,22,
+127,127,texto maquina,255,184,22,19,
+128,128,texto maquina,360,182,16,19,
+129,129,texto maquina,174,222,127,26,
+130,130,texto maquina,46,259,223,21,
+131,131,texto maquina,49,287,71,19,
+132,132,texto maquina,45,313,68,20,
+133,133,texto maquina,47,341,72,20,
+134,134,texto maquina,49,369,93,17,
+135,135,texto maquina,240,369,35,18,
+136,136,texto maquina,44,396,89,15,
+137,137,texto maquina,45,427,77,16,
+138,138,texto maquina,69,465,134,17,
+139,139,texto maquina,300,463,74,18,
+140,140,texto maquina,51,483,97,17,
+141,141,texto maquina,52,519,132,19,
+142,142,texto maquina,254,520,131,18,
+143,143,texto maquina,51,556,109,19,
+144,144,texto maquina,251,557,109,17,
+145,145,texto maquina,46,601,238,21,
+146,146,texto maquina,44,625,72,21,
+147,147,texto maquina,43,651,96,19,
+148,148,texto maquina,41,673,136,20,
+149,149,texto maquina,45,700,83,19,
+150,150,texto maquina,43,723,140,22,
+151,151,texto maquina,237,727,48,16,
+152,152,texto maquina,330,726,47,19,
+153,153,texto maquina,45,750,193,18,
+154,154,texto maquina,47,772,63,20,
+155,155,texto maquina,47,798,71,16,
+156,156,texto maquina,241,821,35,21,
+157,157,texto maquina,46,848,87,19,
+158,158,texto maquina,45,874,314,19,
+159,159,texto maquina,136,895,21,17,
+160,160,texto maquina,238,894,16,19,
+161,161,texto maquina,44,923,239,17,
+162,162,texto maquina,46,946,72,18,
+163,163,texto maquina,44,972,69,18,
+164,164,texto maquina,43,999,149,16,
+165,165,texto maquina,44,1025,76,16,
+166,166,texto maquina,239,1046,37,22,
+167,167,texto maquina,44,1075,93,18,
+168,168,texto maquina,42,1101,167,18,
+169,169,texto maquina,45,1124,154,20,
+170,170,texto maquina,44,1152,143,19,
+171,171,texto maquina,45,1183,134,16,
+172,172,texto maquina,66,1199,122,20,
+173,173,texto maquina,69,1214,86,21,
+174,174,texto maquina,44,1395,145,17,
+175,175,texto maquina,62,1412,102,17,
+176,176,texto maquina,44,1504,126,19,
+177,177,texto maquina,417,1583,26,28,
+178,178,texto maquina,757,1587,27,25,
+179,179,texto maquina,419,1519,25,18,
+180,180,texto maquina,515,1518,170,18,
+181,181,texto maquina,757,1521,24,17,
+182,182,texto maquina,803,1505,130,19,
+183,183,texto maquina,985,1393,138,20,
+184,184,texto maquina,1007,1411,96,18,
+185,185,texto maquina,984,1182,140,18,
+186,186,texto maquina,1003,1200,118,17,
+187,187,texto maquina,1006,1217,87,17,
+188,188,texto maquina,888,223,120,25,
+189,189,texto maquina,769,261,222,17,
+190,190,texto maquina,768,286,68,19,
+191,191,texto maquina,767,314,67,18,
+192,192,texto maquina,767,337,75,21,
+193,193,texto maquina,765,368,97,18,
+194,194,texto maquina,958,366,38,19,
+195,195,texto maquina,765,392,92,20,
+196,196,texto maquina,762,425,86,19,
+197,197,texto maquina,787,463,140,19,
+198,198,texto maquina,1021,464,75,17,
+199,199,texto maquina,768,481,105,19,
+200,200,texto maquina,772,515,136,25,
+201,201,texto maquina,774,558,108,17,
+202,202,texto maquina,971,518,137,21,
+203,203,texto maquina,974,552,105,21,
+204,204,texto maquina,765,601,247,20,
+205,205,texto maquina,762,625,80,19,
+206,206,texto maquina,767,648,95,22,
+207,207,texto maquina,762,673,132,21,
+208,208,texto maquina,767,699,77,21,
+209,209,texto maquina,766,724,134,20,
+210,210,texto maquina,958,724,45,20,
+211,211,texto maquina,1056,726,39,19,
+212,212,texto maquina,769,751,187,17,
+213,213,texto maquina,767,772,64,19,
+214,214,texto maquina,766,800,72,15,
+215,215,texto maquina,960,818,36,27,
+216,216,texto maquina,768,849,86,19,
+217,217,texto maquina,765,874,313,16,
+218,218,texto maquina,854,895,22,15,
+219,219,texto maquina,958,893,18,18,
+220,220,texto maquina,764,922,240,18,
+221,221,texto maquina,767,945,74,19,
+222,222,texto maquina,769,973,64,19,
+223,223,texto maquina,766,996,145,18,
+224,224,texto maquina,768,1022,73,19,
+225,225,texto maquina,957,1047,35,25,
+226,226,texto maquina,767,1074,87,19,
+227,227,texto maquina,762,1097,173,20,
+228,228,texto maquina,765,1124,151,18,
+229,229,texto maquina,766,1152,140,18,
+230,230,texto maquina,473,220,262,24,
+231,231,texto maquina,487,258,226,16,
+232,232,texto maquina,447,279,19,21,
+233,233,texto maquina,729,276,21,22,
+234,234,texto maquina,473,276,248,16,
+235,235,texto maquina,505,299,188,21,
+236,236,texto maquina,504,328,194,19,
+237,237,texto maquina,504,346,193,19,
+238,238,texto maquina,545,361,111,18,
+239,239,texto maquina,467,324,15,18,
+240,240,texto maquina,465,346,15,20,
+241,241,texto maquina,713,329,19,13,
+242,242,texto maquina,718,346,11,22,
+243,243,texto maquina,467,392,17,16,
+244,244,texto maquina,545,394,112,16,
+245,245,texto maquina,716,390,15,20,
+246,246,texto maquina,470,422,12,17,
+247,247,texto maquina,496,420,205,24,
+248,248,texto maquina,714,424,17,19,
+249,249,texto maquina,482,441,233,18,
+250,250,texto maquina,466,471,15,17,
+251,251,texto maquina,715,472,19,17,
+252,252,texto maquina,498,473,207,17,
+253,253,texto maquina,484,488,230,20,
+254,254,texto maquina,468,517,14,19,
+255,255,texto maquina,504,519,195,19,
+256,256,texto maquina,571,537,56,16,
+257,257,texto maquina,718,517,12,19,
+258,258,texto maquina,509,1030,180,18,
+259,259,texto maquina,565,1051,72,12,
+260,260,texto maquina,466,1076,269,18,
+261,261,texto maquina,447,1091,302,13,
+262,262,texto maquina,471,1103,258,14,
+263,263,texto maquina,451,1126,18,18,
+264,264,texto maquina,472,1125,254,18,
+265,265,texto maquina,727,1124,26,21,
+266,266,texto maquina,454,1152,292,22,
+267,267,texto maquina,469,565,14,19,
+268,268,texto maquina,490,568,218,17,
+269,269,texto maquina,572,588,58,15,
+270,270,texto maquina,715,568,12,16,
+271,271,texto maquina,468,616,16,18,
+272,272,texto maquina,485,617,228,15,
+273,273,texto maquina,719,616,11,18,
+274,274,texto maquina,483,633,237,16,
+275,275,texto maquina,511,650,178,15,
+276,276,texto maquina,467,680,15,15,
+277,277,texto maquina,495,679,216,19,
+278,278,texto maquina,551,697,95,16,
+279,279,texto maquina,716,679,17,19,
+280,280,texto maquina,470,727,21,19,
+281,281,texto maquina,536,728,125,19,
+282,282,texto maquina,708,729,22,16,
+283,283,texto maquina,470,757,17,19,
+284,284,texto maquina,559,763,79,15,
+285,285,texto maquina,708,756,20,18,
+286,286,texto maquina,471,789,19,21,
+287,287,texto maquina,535,793,126,16,
+288,288,texto maquina,707,792,23,12,
+289,289,texto maquina,468,819,22,19,
+290,290,texto maquina,530,823,138,18,
+291,291,texto maquina,710,823,20,16,
+292,292,texto maquina,468,852,22,17,
+293,293,texto maquina,536,854,127,17,
+294,294,texto maquina,708,850,21,21,
+295,295,texto maquina,467,884,20,18,
+296,296,texto maquina,506,886,191,19,
+297,297,texto maquina,501,904,198,18,
+298,298,texto maquina,708,886,24,18,
+299,299,texto maquina,468,932,23,19,
+300,300,texto maquina,535,933,131,20,
+301,301,texto maquina,558,953,85,17,
+302,302,texto maquina,707,934,24,19,
+303,303,texto maquina,467,980,22,17,
+304,304,texto maquina,495,985,210,15,
+305,305,texto maquina,538,1000,123,19,
+306,306,texto maquina,710,978,22,20,
