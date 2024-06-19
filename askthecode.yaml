@@ -1,0 +1,1334 @@
+openapi: 3.0.1
+info:
+  title: AskTheCode Plugin
+  description: Plugin to explain the code from Github and assist with its usage. Works with the provided Github file link.
+  version: v1
+paths:
+  /api/repository/structure:
+    post:
+      tags:
+        - Repository
+      summary: 'Retrieves the Github repository file structure to analyze it and be able to query only relevant files. If the provided URL contains specific branch and directory information, prioritize using that over querying the entire repository structure.'
+      operationId: GetRepositoryStructure
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StructureRequestDto'
+      responses:
+        '200':
+          description: Returns the github repository structure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StructureResponseDto'
+      security:
+        - Bearer: [ ]
+      x-openai-isConsequential: false
+  /api/repository/content:
+    post:
+      tags:
+        - Repository
+      summary: 'Retrieves github repository file contents, possibly filtered by file names. Line numbers can be specified in URL as well.NEVER query this endpoint without previously querying GetRepositoryStructure endpoint and when the next step is set to GetRepositoryStructure.'
+      operationId: GetRepositoryContent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentRequestDto'
+      responses:
+        '200':
+          description: Returns the contents of the requested files
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepositoryContentResponseDto'
+      security:
+        - Bearer: [ ]
+      x-openai-isConsequential: false
+  /api/repository/branch/list:
+    post:
+      tags:
+        - RepositoryBranch
+      summary: Retrieves the list of branches in the repository
+      operationId: ListRepositoryBranches
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListRepositoryBranchesRequestDto'
+      responses:
+        '200':
+          description: Returns the list of repository branches
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRepositoryBranchesResponseDto'
+      security:
+        - Bearer: [ ]
+      x-openai-isConsequential: false
+  /api/repository/branch/create:
+    post:
+      tags:
+        - RepositoryBranch
+      summary: Creates new repository branch
+      operationId: CreateRepositoryBranch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRepositoryBranchRequestDto'
+      responses:
+        '200':
+          description: Returns the result of the branch creation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRepositoryBranchResponseDto'
+      security:
+        - Bearer: [ ]
+      x-openai-isConsequential: true
+  /api/repository/branch/delete:
+    post:
+      tags:
+        - RepositoryBranch
+      summary: Deletes repository branch
+      operationId: DeleteRepositoryBranch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRepositoryBranchRequestDto'
+      responses:
+        '200':
+          description: Returns the result of the branch deletion
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteRepositoryBranchResponseDto'
+      security:
+        - Bearer: [ ]
+      x-openai-isConsequential: true
+  /api/repository/commit/history:
+    post:
+      tags:
+        - RepositoryCommits
+      summary: Retrieves commit history for a specific file
+      operationId: GetRepositoryCommitHistory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommitHistoryRequestDto'
+      responses:
+        '200':
+          description: Returns the commits history for the specific file
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommitHistoryResponseDto'
+      security:
+        - Bearer: [ ]
+      x-openai-isConsequential: false
+  /api/repository/commit/overview:
+    post:
+      tags:
+        - RepositoryCommits
+      summary: Retrieves commit overview by the commit SHA
+      operationId: GetRepositoryCommitOverview
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommitOverviewRequestDto'
+      responses:
+        '200':
+          description: Returns the commit overview
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommitOverviewResponseDto'
+      security:
+        - Bearer: [ ]
+      x-openai-isConsequential: false
+  /api/repository/commit/changes:
+    post:
+      tags:
+        - RepositoryCommits
+      summary: Retrieves commit file changes by the commit SHA
+      operationId: GetRepositoryCommitChanges
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommitChangesRequestDto'
+      responses:
+        '200':
+          description: Returns the commit overview
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommitChangesResponseDto'
+      security:
+        - Bearer: [ ]
+      x-openai-isConsequential: false
+  /api/repository/file/update/checkout:
+    post:
+      tags:
+        - RepositoryFile
+      summary: Checkouts file for update and retrieves github repository file content for edit and update. This content should be used when using the UpdateRepositoryFile endpoint for updating the file content.
+      operationId: CheckoutRepositoryFileForUpdate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutRepositoryFileRequestDto'
+      responses:
+        '200':
+          description: 'Returns the content of the file for updating. The response contains line numbers, never show them to the end user.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutRepositoryFileResponseDto'
+      security:
+        - Bearer: [ ]
+      x-openai-isConsequential: false
+  /api/repository/file/create:
+    post:
+      tags:
+        - RepositoryFile
+      summary: Creates repository file. You MUST always print the code block with the content of the change you are going to send prior invoking this endpoint
+      operationId: CreateRepositoryFile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRepositoryFileRequestDto'
+      responses:
+        '200':
+          description: Returns the github repository file creation result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRepositoryFileResponseDto'
+      security:
+        - Bearer: [ ]
+      x-openai-isConsequential: true
+  /api/repository/file/update:
+    post:
+      tags:
+        - RepositoryFile
+      summary: Updates repository file. Never use this endpoint before checking the file out for edit using the CheckoutRepositoryFileForEdit endpoint. You MUST always print the code block with the content of the change you are going to send prior invoking this endpoint
+      operationId: UpdateRepositoryFile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRepositoryFileRequestDto'
+      responses:
+        '200':
+          description: Returns the github repository file update result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateRepositoryFileResponseDto'
+      security:
+        - Bearer: [ ]
+      x-openai-isConsequential: true
+  /api/repository/file/delete:
+    post:
+      tags:
+        - RepositoryFile
+      summary: Deletes the repository file. Use this endpoint when user asks to delete the file. Invoking CheckoutRepositoryFileForUpdate endpoint is not needed.
+      operationId: DeleteRepositoryFile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRepositoryFileRequestDto'
+      responses:
+        '200':
+          description: Returns the repository file deletion result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteRepositoryFileResponseDto'
+      security:
+        - Bearer: [ ]
+      x-openai-isConsequential: true
+  /api/repository/issue:
+    post:
+      tags:
+        - RepositoryIssues
+      summary: Retrieves github issue and its comments by the issue URL
+      operationId: GetRepositoryIssue
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueRequestDto'
+      responses:
+        '200':
+          description: Returns the issue with its comments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IssueResponseDto'
+      security:
+        - Bearer: [ ]
+      x-openai-isConsequential: false
+  /api/repository/issue/comment/post:
+    post:
+      tags:
+        - RepositoryIssues
+      summary: Posts the comment under the github issue specified by the issue URL
+      operationId: PostRepositoryIssueComment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostIssueCommentRequestDto'
+      responses:
+        '200':
+          description: Returns the result of the comment posting
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostIssueCommentResponseDto'
+      security:
+        - Bearer: [ ]
+      x-openai-isConsequential: true
+  /api/search/repository/code:
+    post:
+      tags:
+        - Search
+      summary: 'Search code by user specified keywords. Use when user explicitly asked to search for something. Otherwise prefer to fetch the repository structure. Invoke only with user-specified, specific keywords (e.g., file, class, method names). Avoid generic terms.'
+      operationId: SearchCode
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchCodeRequestDto'
+      responses:
+        '200':
+          description: Returns search by code results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchCodeResponseDto'
+      security:
+        - Bearer: [ ]
+      x-openai-isConsequential: false
+  /api/search/repository/issues:
+    post:
+      tags:
+        - Search
+      summary: Search issues by user specified keywords. Use only when user explicitly asked to search for issues and provided search query.
+      operationId: SearchIssues
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchIssuesRequestDto'
+      responses:
+        '200':
+          description: Returns found issues
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchIssuesResponseDto'
+      security:
+        - Bearer: [ ]
+      x-openai-isConsequential: false
+  /api/search/repository/commits:
+    post:
+      tags:
+        - Search
+      summary: Search commits by user specified keywords. Use only when user explicitly asked to search for commits and provided search query.
+      operationId: SearchCommits
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchCommitsRequestDto'
+      responses:
+        '200':
+          description: Returns found issues
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchCommitsResponseDto'
+      security:
+        - Bearer: [ ]
+      x-openai-isConsequential: false
+  /api/search/repository:
+    post:
+      tags:
+        - Search
+      summary: Search repositories by user specified keywords. Use only when user explicitly asked to search for repositories and provided search query.
+      operationId: SearchRepositories
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRepositoriesRequestDto'
+      responses:
+        '200':
+          description: Returns found repositories
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchRepositoriesResponseDto'
+      security:
+        - Bearer: [ ]
+      x-openai-isConsequential: false
+components:
+  schemas:
+    CheckoutRepositoryFileRequestDto:
+      required:
+        - url
+      type: object
+      properties:
+        url:
+          minLength: 1
+          type: string
+          description: 'Full Github repository URL provided by the user. For example: https://github.com/[owner]/[repo]/blob/[branch]/[file-path]#[additional-parameters]. The URL MUST be identical to the one, that was provided by the user, you MUST NEVER alter or truncate it. This is crucial for valid responses. You should NEVER truncate additional-parameters.'
+        branch:
+          type: string
+          description: Repository branch. Provide only if user has explicitly specified it or the previous plugin response contains it.
+          nullable: true
+        filePath:
+          type: string
+          description: Paths to the file. Provide only if user has explicitly specified it or the previous plugin response contains it.
+          nullable: true
+      additionalProperties: false
+    CheckoutRepositoryFileResponseDto:
+      type: object
+      properties:
+        assistantNextSteps:
+          type: string
+          nullable: true
+        usefulUrls:
+          $ref: '#/components/schemas/UsefulUrlsDto'
+        fileContent:
+          $ref: '#/components/schemas/FileContentDto'
+      additionalProperties: false
+    CommitChangesRequestDto:
+      required:
+        - url
+      type: object
+      properties:
+        url:
+          minLength: 1
+          type: string
+          description: 'Full Github repository URL provided by the user. For example: https://github.com/[owner]/[repo]/blob/[branch]/[file-path]#[additional-parameters]. The URL MUST be identical to the one, that was provided by the user, you MUST NEVER alter or truncate it. This is crucial for valid responses. You should NEVER truncate additional-parameters.'
+        fromFileName:
+          type: string
+          description: Name of the file to start grabbing changes from. Pass it when you want to query the continuation of the commit changes
+          nullable: true
+      additionalProperties: false
+    CommitChangesResponseDto:
+      type: object
+      properties:
+        assistantNextSteps:
+          type: string
+          nullable: true
+        usefulUrls:
+          $ref: '#/components/schemas/UsefulUrlsDto'
+        commit:
+          $ref: '#/components/schemas/RepositoryCommitChangesDto'
+      additionalProperties: false
+    CommitHistoryCommitDto:
+      type: object
+      properties:
+        commitUrl:
+          type: string
+          nullable: true
+          readOnly: true
+        message:
+          type: string
+          nullable: true
+          readOnly: true
+        commitDate:
+          type: string
+          format: date-time
+          readOnly: true
+        author:
+          type: string
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    CommitHistoryRequestDto:
+      required:
+        - url
+      type: object
+      properties:
+        url:
+          minLength: 1
+          type: string
+          description: 'Full Github repository URL provided by the user. For example: https://github.com/[owner]/[repo]/blob/[branch]/[file-path]#[additional-parameters]. The URL MUST be identical to the one, that was provided by the user, you MUST NEVER alter or truncate it. This is crucial for valid responses. You should NEVER truncate additional-parameters.'
+        branch:
+          type: string
+          description: Repository branch. Provide only if user has explicitly specified it or the previous plugin response contains it
+          nullable: true
+        filePath:
+          type: string
+          description: Path to the file to request the commit history for. Use path relative to the root directory of the repository
+          nullable: true
+      additionalProperties: false
+    CommitHistoryResponseDto:
+      type: object
+      properties:
+        assistantNextSteps:
+          type: string
+          nullable: true
+        usefulUrls:
+          $ref: '#/components/schemas/UsefulUrlsDto'
+        filePath:
+          type: string
+          description: File path the history is returned for
+          nullable: true
+          readOnly: true
+        commits:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommitHistoryCommitDto'
+          description: 'List of commits in the file history, ordered by date'
+          nullable: true
+          readOnly: true
+        count:
+          type: integer
+          description: True if not all commits have been returned returned
+          format: int32
+          readOnly: true
+      additionalProperties: false
+    CommitOverviewRequestDto:
+      required:
+        - url
+      type: object
+      properties:
+        url:
+          minLength: 1
+          type: string
+          description: 'Full Github repository URL provided by the user. For example: https://github.com/[owner]/[repo]/blob/[branch]/[file-path]#[additional-parameters]. The URL MUST be identical to the one, that was provided by the user, you MUST NEVER alter or truncate it. This is crucial for valid responses. You should NEVER truncate additional-parameters.'
+      additionalProperties: false
+    CommitOverviewResponseDto:
+      type: object
+      properties:
+        assistantNextSteps:
+          type: string
+          nullable: true
+        usefulUrls:
+          $ref: '#/components/schemas/UsefulUrlsDto'
+        commit:
+          $ref: '#/components/schemas/RepositoryCommitOverviewDto'
+      additionalProperties: false
+    ContentRequestDto:
+      required:
+        - filePaths
+        - url
+      type: object
+      properties:
+        url:
+          minLength: 1
+          type: string
+          description: 'Full Github repository URL provided by the user. For example: https://github.com/[owner]/[repo]/blob/[branch]/[file-path]#[additional-parameters]. The URL MUST be identical to the one, that was provided by the user, you MUST NEVER alter or truncate it. This is crucial for valid responses. You should NEVER truncate additional-parameters.'
+        branch:
+          type: string
+          description: 'Repository branch. Provide only if user has explicitly specified it or the previous plugin response contains it. When requesting file from commit, use commit SHA.'
+          nullable: true
+        relativePath:
+          type: string
+          description: Relative paths to the directory. Provide only if user has explicitly specified it or the previous plugin response contains it.
+          nullable: true
+        filePaths:
+          type: array
+          items:
+            type: string
+          description: 'Files to query the content of. Order them by relevance descendant. This should NEVER contain the repository branch. First determine the branch if possible, and only then the file paths. Pass only if you are sure about the file path, call GetRepositoryStructure otherwise'
+      additionalProperties: false
+    CreateRepositoryBranchRequestDto:
+      required:
+        - branchName
+        - url
+      type: object
+      properties:
+        url:
+          minLength: 1
+          type: string
+          description: 'Full Github repository URL provided by the user. For example: https://github.com/[owner]/[repo]/blob/[branch]/[file-path]#[additional-parameters]. The URL MUST be identical to the one, that was provided by the user, you MUST NEVER alter or truncate it. This is crucial for valid responses. You should NEVER truncate additional-parameters.'
+        branchName:
+          minLength: 1
+          type: string
+          description: The name of the branch that should be created
+        parentBranchName:
+          type: string
+          description: 'The name of the branch that the new branch should be created from. If not specified, the repository default branch will be used.'
+          nullable: true
+      additionalProperties: false
+    CreateRepositoryBranchResponseDto:
+      type: object
+      properties:
+        assistantNextSteps:
+          type: string
+          nullable: true
+        usefulUrls:
+          $ref: '#/components/schemas/UsefulUrlsDto'
+      additionalProperties: false
+    CreateRepositoryFileRequestDto:
+      required:
+        - commitMessage
+        - content
+        - url
+      type: object
+      properties:
+        url:
+          minLength: 1
+          type: string
+          description: 'Full Github repository URL provided by the user. For example: https://github.com/[owner]/[repo]/blob/[branch]/[file-path]#[additional-parameters]. The URL MUST be identical to the one, that was provided by the user, you MUST NEVER alter or truncate it. This is crucial for valid responses. You should NEVER truncate additional-parameters.'
+        branch:
+          type: string
+          description: Repository branch. Provide only if user has explicitly specified it or the previous plugin response contains it.
+          nullable: true
+        filePath:
+          type: string
+          description: Paths to the file.
+          nullable: true
+        content:
+          minLength: 1
+          type: string
+          description: File content
+        commitMessage:
+          minLength: 1
+          type: string
+          description: Commit message to be used when saving the file.
+        isApprovedByUserForDefaultBranch:
+          type: boolean
+          description: 'Always default it to false. Set it to true ONLY when you previously explicitly asked users confirmation to save to the default repository branch. It''s crucial to be very careful with passing true, it can corrupt users repository code.'
+      additionalProperties: false
+    CreateRepositoryFileResponseDto:
+      type: object
+      properties:
+        assistantNextSteps:
+          type: string
+          nullable: true
+        usefulUrls:
+          $ref: '#/components/schemas/UsefulUrlsDto'
+        createCommit:
+          $ref: '#/components/schemas/RepositoryCommitOverviewDto'
+      additionalProperties: false
+    DeleteRepositoryBranchRequestDto:
+      required:
+        - branchName
+        - url
+      type: object
+      properties:
+        url:
+          minLength: 1
+          type: string
+          description: 'Full Github repository URL provided by the user. For example: https://github.com/[owner]/[repo]/blob/[branch]/[file-path]#[additional-parameters]. The URL MUST be identical to the one, that was provided by the user, you MUST NEVER alter or truncate it. This is crucial for valid responses. You should NEVER truncate additional-parameters.'
+        branchName:
+          minLength: 1
+          type: string
+          description: The name of the branch that should be deleted
+      additionalProperties: false
+    DeleteRepositoryBranchResponseDto:
+      type: object
+      properties:
+        assistantNextSteps:
+          type: string
+          nullable: true
+        usefulUrls:
+          $ref: '#/components/schemas/UsefulUrlsDto'
+      additionalProperties: false
+    DeleteRepositoryFileRequestDto:
+      required:
+        - commitMessage
+        - url
+      type: object
+      properties:
+        url:
+          minLength: 1
+          type: string
+          description: 'Full Github repository URL provided by the user. For example: https://github.com/[owner]/[repo]/blob/[branch]/[file-path]#[additional-parameters]. The URL MUST be identical to the one, that was provided by the user, you MUST NEVER alter or truncate it. This is crucial for valid responses. You should NEVER truncate additional-parameters.'
+        branch:
+          type: string
+          description: Repository branch. Provide only if user has explicitly specified it or the previous plugin response contains it.
+          nullable: true
+        filePath:
+          type: string
+          description: Paths to the file. Provide only if user has explicitly specified it or the previous plugin response contains it.
+          nullable: true
+        commitMessage:
+          minLength: 1
+          type: string
+          description: Commit message to be used when saving the file.
+        isApprovedByUserForDefaultBranch:
+          type: boolean
+          description: 'Always default it to false. Set it to true ONLY when you previously explicitly asked users confirmation to save to the default repository branch. It''s crucial to be very careful with passing true, it can corrupt users repository code.'
+      additionalProperties: false
+    DeleteRepositoryFileResponseDto:
+      type: object
+      properties:
+        assistantNextSteps:
+          type: string
+          nullable: true
+        usefulUrls:
+          $ref: '#/components/schemas/UsefulUrlsDto'
+        updateCommit:
+          $ref: '#/components/schemas/RepositoryCommitOverviewDto'
+      additionalProperties: false
+    FileContentDto:
+      type: object
+      properties:
+        path:
+          type: string
+          description: Relative path to the file. The path is always relative to the root folder
+          nullable: true
+          readOnly: true
+        content:
+          type: string
+          description: 'The content of the file. If null or missing, this means that the file content overflowed the allowed maximum and should be queried separately in the next request. Please explain the user why not all files where returned and ask if he wants to proceed.'
+          nullable: true
+          readOnly: true
+        error:
+          type: string
+          description: An error that occurred when getting the file content
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    FoundCommitDto:
+      type: object
+      properties:
+        url:
+          type: string
+          description: Commit Url. Use it to request the overview and changes for the specific commit
+          nullable: true
+          readOnly: true
+        message:
+          type: string
+          description: Commit message
+          nullable: true
+        matches:
+          type: array
+          items:
+            type: string
+          description: Matches within the commit
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    FoundFileDto:
+      type: object
+      properties:
+        path:
+          type: string
+          description: Path to the file relative to the repository root
+          nullable: true
+          readOnly: true
+        matches:
+          type: array
+          items:
+            type: string
+          description: Lines of code within the file that matched the search
+          nullable: true
+          readOnly: true
+        totals:
+          $ref: '#/components/schemas/TextMatchesTotalsDto'
+      additionalProperties: false
+    FoundIssueDto:
+      type: object
+      properties:
+        url:
+          type: string
+          description: Issue Url. Use it to request the details about the issue
+          nullable: true
+          readOnly: true
+        title:
+          type: string
+          description: Issue title
+          nullable: true
+        matches:
+          type: array
+          items:
+            $ref: '#/components/schemas/TextMatchDto'
+          description: Matches within the issue
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    FoundRepositoryDto:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Repository name
+          nullable: true
+        url:
+          type: string
+          description: Repository URL. Use it to query over the particular repository
+          nullable: true
+        description:
+          type: string
+          description: Repository description
+          nullable: true
+      additionalProperties: false
+    GithubIssueCommentDto:
+      type: object
+      properties:
+        body:
+          type: string
+          description: 'Body of issue comment. It has the next format: [CREATION DATE] USERNAME (USER ROLE): (MESSAGE)'
+          nullable: true
+          readOnly: true
+        likes:
+          type: integer
+          description: Number of positive reactions under the issue comment.
+          format: int32
+          readOnly: true
+        dislikes:
+          type: integer
+          description: Number of negative reactions under the issue comment.
+          format: int32
+          readOnly: true
+      additionalProperties: false
+    GithubIssueDto:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title of issue.
+          nullable: true
+          readOnly: true
+        body:
+          type: string
+          description: 'Body of issue. It has the next format: [CREATION DATE] USERNAME (USER ROLE): (MESSAGE)'
+          nullable: true
+          readOnly: true
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/GithubIssueCommentDto'
+          description: List of comments.
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    IssueRequestDto:
+      required:
+        - issueUrl
+      type: object
+      properties:
+        issueUrl:
+          minLength: 1
+          type: string
+          description: Github issue URL
+        comment:
+          type: string
+          description: The message of the comment you want to request. Provide only when you want to request some specific comment.
+          nullable: true
+        lastComment:
+          type: string
+          description: The message of last comment you know about. Provide only when you want to request more issue comments. Never set both comment and lastComment fields.
+          nullable: true
+      additionalProperties: false
+    IssueResponseDto:
+      type: object
+      properties:
+        assistantNextSteps:
+          type: string
+          nullable: true
+        usefulUrls:
+          $ref: '#/components/schemas/UsefulUrlsDto'
+        issue:
+          $ref: '#/components/schemas/GithubIssueDto'
+      additionalProperties: false
+    ListRepositoryBranchesRequestDto:
+      required:
+        - url
+      type: object
+      properties:
+        url:
+          minLength: 1
+          type: string
+          description: 'Full Github repository URL provided by the user. For example: https://github.com/[owner]/[repo]/blob/[branch]/[file-path]#[additional-parameters]. The URL MUST be identical to the one, that was provided by the user, you MUST NEVER alter or truncate it. This is crucial for valid responses. You should NEVER truncate additional-parameters.'
+      additionalProperties: false
+    ListRepositoryBranchesResponseDto:
+      type: object
+      properties:
+        assistantNextSteps:
+          type: string
+          nullable: true
+        usefulUrls:
+          $ref: '#/components/schemas/UsefulUrlsDto'
+        branches:
+          type: array
+          items:
+            $ref: '#/components/schemas/RepositoryBranch'
+          nullable: true
+      additionalProperties: false
+    PostIssueCommentRequestDto:
+      required:
+        - comment
+        - issueUrl
+      type: object
+      properties:
+        issueUrl:
+          minLength: 1
+          type: string
+          description: Github issue URL
+        comment:
+          minLength: 1
+          type: string
+          description: The message of the comment to post under the issue
+        isApprovedByUser:
+          type: boolean
+          description: Has user approved the comment. If user asked you to post some comment you should first present him the issue URL you want to post comment to and the comment body. Set this to true only if you have explicitly asked for confirmation and user has approved it.
+      additionalProperties: false
+    PostIssueCommentResponseDto:
+      type: object
+      properties:
+        assistantNextSteps:
+          type: string
+          nullable: true
+        usefulUrls:
+          $ref: '#/components/schemas/UsefulUrlsDto'
+      additionalProperties: false
+    RepositoryBranch:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        headSha:
+          type: string
+          nullable: true
+      additionalProperties: false
+    RepositoryCommitChangesDto:
+      type: object
+      properties:
+        sha:
+          type: string
+          description: 'SHA of the commit. When getting full content of the file, use it as the branch name until other branch is explicitly specified by user'
+          nullable: true
+          readOnly: true
+        parentCommitSha:
+          type: string
+          description: SHA of the parent commit. Use it in URL to query the full content of the file that was before the commit when requesting GetRepositoryContent
+          nullable: true
+          readOnly: true
+        changes:
+          type: array
+          items:
+            $ref: '#/components/schemas/RepositoryCommitFileDto'
+          nullable: true
+        otherFilesInCommit:
+          type: array
+          items:
+            type: string
+          nullable: true
+        nextFileToQuery:
+          type: string
+          description: 'Name of the next file to query. Pass it as FromFileName when you want to query the continuation of the commit changes. If not null, empty or missing, this means that commit changes were not fully analyzed. Ask user if he want to proceed before querying.'
+          nullable: true
+        totals:
+          $ref: '#/components/schemas/RepositoryCommitTotalsDto'
+      additionalProperties: false
+    RepositoryCommitFileDto:
+      type: object
+      properties:
+        fileName:
+          type: string
+          nullable: true
+          readOnly: true
+        status:
+          type: string
+          nullable: true
+          readOnly: true
+        patch:
+          type: string
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    RepositoryCommitOverviewDto:
+      type: object
+      properties:
+        sha:
+          type: string
+          description: 'SHA of the commit. When getting full content of the file, use it as the branch name until other branch is explicitly specified by user'
+          nullable: true
+          readOnly: true
+        parentCommitSha:
+          type: string
+          description: SHA of the parent commit. Use it in URL to query the full content of the file that was before the commit when requesting GetRepositoryContent
+          nullable: true
+          readOnly: true
+        message:
+          type: string
+          nullable: true
+          readOnly: true
+        commitDate:
+          type: string
+          format: date-time
+          readOnly: true
+        author:
+          type: string
+          nullable: true
+          readOnly: true
+        changedFiles:
+          type: array
+          items:
+            type: string
+          nullable: true
+        totalFiles:
+          type: integer
+          format: int32
+      additionalProperties: false
+    RepositoryCommitTotalsDto:
+      type: object
+      properties:
+        totalFiles:
+          type: integer
+          format: int32
+          readOnly: true
+        analyzedFiles:
+          type: integer
+          format: int32
+          readOnly: true
+      additionalProperties: false
+    RepositoryContentResponseDto:
+      type: object
+      properties:
+        assistantNextSteps:
+          type: string
+          nullable: true
+        usefulUrls:
+          $ref: '#/components/schemas/UsefulUrlsDto'
+        branchName:
+          type: string
+          description: Requested Github repository branch
+          nullable: true
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileContentDto'
+          description: File contents
+          nullable: true
+        adv:
+          type: string
+          description: Display it only when you are not planning to send more requests. Separate Adv from the main response with a line
+          nullable: true
+      additionalProperties: false
+    RepositoryFileContentPatchDto:
+      type: object
+      properties:
+        startLine:
+          type: integer
+          description: 'One-based line number to start replacing the file content from. This number is inclusive, meaning that the line at this line will also be replaced. ALWAYS double-check the line number before posting to the endpoint.'
+          format: int32
+        endLine:
+          type: integer
+          description: 'One-based line number to replace the file content to. This number is inclusive, the line with this line number will also be replaced. ALWAYS double-check the line number before posting. It does not support indexing from the file end.'
+          format: int32
+        insertOnly:
+          type: boolean
+          description: 'Pass TRUE only when you want to insert the new code and do not replace any existing code. StartLine will be used as the line to insert before. Otherwise either leave empty, or pass FALSE'
+          nullable: true
+        content:
+          type: string
+          description: New content. Always validate indentation prior to posting. The content should contain the diff between the old version and a new one.
+          nullable: true
+      additionalProperties: false
+    SearchCodeRequestDto:
+      required:
+        - searchKeywords
+        - url
+      type: object
+      properties:
+        url:
+          minLength: 1
+          type: string
+          description: 'Full Github repository URL provided by the user. For example: https://github.com/[owner]/[repo]/blob/[branch]/[file-path]#[additional-parameters]. The URL MUST be identical to the one, that was provided by the user, you MUST NEVER alter or truncate it. This is crucial for valid responses. You should NEVER truncate additional-parameters.'
+        branch:
+          type: string
+          description: 'Repository branch. Provide only if user has explicitly specified it or the previous plugin response contains it. When requesting file from commit, use commit SHA.'
+          nullable: true
+        relativePath:
+          type: string
+          description: Relative path to the file or directory to search in. Provide only if user has explicitly specified it or the previous plugin response contains it.
+          nullable: true
+        searchKeywords:
+          type: array
+          items:
+            type: string
+          description: 'Search keywords. Invoke only with user-specified keywords. Never use keywords that are not part of the user prompt. When user asks to search for function definitions in a specific file (not directory) and you cannot parse them from file content, pass function keyword relevant for the file language.'
+        searchHitLinesCount:
+          type: integer
+          description: Number of lines to retrieve. Set only when explicitly asked to retrieve the specified amount of lines by the user.
+          format: int32
+          nullable: true
+        skipMatchesCount:
+          type: integer
+          description: Number of matches to skip in the file. use only when user is searching over file and you need to search for matches that were omitted from the previous search request
+          format: int32
+          nullable: true
+      additionalProperties: false
+    SearchCodeResponseDto:
+      type: object
+      properties:
+        assistantNextSteps:
+          type: string
+          nullable: true
+        usefulUrls:
+          $ref: '#/components/schemas/UsefulUrlsDto'
+        branchName:
+          type: string
+          nullable: true
+        searchResults:
+          type: array
+          items:
+            $ref: '#/components/schemas/FoundFileDto'
+          nullable: true
+        adv:
+          type: string
+          description: Display it only when you are not planning to send more requests. Separate Adv from the main response with a line
+          nullable: true
+      additionalProperties: false
+    SearchCommitsRequestDto:
+      required:
+        - searchKeywords
+        - url
+      type: object
+      properties:
+        url:
+          minLength: 1
+          type: string
+          description: 'Full Github repository URL provided by the user. For example: https://github.com/[owner]/[repo]/blob/[branch]/[file-path]#[additional-parameters]. The URL MUST be identical to the one, that was provided by the user, you MUST NEVER alter or truncate it. This is crucial for valid responses. You should NEVER truncate additional-parameters.'
+        searchKeywords:
+          type: array
+          items:
+            type: string
+          description: Search keywords. Invoke only with user-specified keywords. Never use keywords that are not part of the user prompt.
+      additionalProperties: false
+    SearchCommitsResponseDto:
+      type: object
+      properties:
+        assistantNextSteps:
+          type: string
+          nullable: true
+        usefulUrls:
+          $ref: '#/components/schemas/UsefulUrlsDto'
+        commits:
+          type: array
+          items:
+            $ref: '#/components/schemas/FoundCommitDto'
+          description: 'List of found commits, ordered by relevance'
+          nullable: true
+          readOnly: true
+        totalCount:
+          type: integer
+          description: The count of found commits
+          format: int32
+      additionalProperties: false
+    SearchIssuesRequestDto:
+      required:
+        - searchKeywords
+        - url
+      type: object
+      properties:
+        url:
+          minLength: 1
+          type: string
+          description: 'Full Github repository URL provided by the user. For example: https://github.com/[owner]/[repo]/blob/[branch]/[file-path]#[additional-parameters]. The URL MUST be identical to the one, that was provided by the user, you MUST NEVER alter or truncate it. This is crucial for valid responses. You should NEVER truncate additional-parameters.'
+        searchKeywords:
+          type: array
+          items:
+            type: string
+          description: Search keywords. Invoke only with user-specified keywords in singular form. Never use keywords that are not part of the user prompt. Keywords MUST be in singular form.
+      additionalProperties: false
+    SearchIssuesResponseDto:
+      type: object
+      properties:
+        assistantNextSteps:
+          type: string
+          nullable: true
+        usefulUrls:
+          $ref: '#/components/schemas/UsefulUrlsDto'
+        issues:
+          type: array
+          items:
+            $ref: '#/components/schemas/FoundIssueDto'
+          description: 'List of found issues, ordered by relevance'
+          nullable: true
+        totalCount:
+          type: integer
+          description: The count of found issues
+          format: int32
+      additionalProperties: false
+    SearchRepositoriesRequestDto:
+      required:
+        - searchKeywords
+      type: object
+      properties:
+        searchKeywords:
+          type: array
+          items:
+            type: string
+          description: 'Search keywords. Always use a single, specific keyword that best represents the topic. Avoid using multiple keywords for the same topic. OR logic applied, so providing multiple keywords for the same topic will worsen the results. Keywords should be singular, contain single word and clearly defined for precise searches.'
+        language:
+          type: string
+          description: Programming language. Use only when explicitly specified by the user
+          nullable: true
+      additionalProperties: false
+    SearchRepositoriesResponseDto:
+      type: object
+      properties:
+        assistantNextSteps:
+          type: string
+          nullable: true
+        usefulUrls:
+          $ref: '#/components/schemas/UsefulUrlsDto'
+        repositories:
+          type: array
+          items:
+            $ref: '#/components/schemas/FoundRepositoryDto'
+          description: 'List of found repositories, ordered by relevance'
+          nullable: true
+          readOnly: true
+        totalCount:
+          type: integer
+          description: The count of found repositories
+          format: int32
+      additionalProperties: false
+    StructureRequestDto:
+      required:
+        - url
+      type: object
+      properties:
+        url:
+          minLength: 1
+          type: string
+          description: 'Full Github repository URL provided by the user. For example: https://github.com/[owner]/[repo]/blob/[branch]/[file-path]#[additional-parameters]. The URL MUST be identical to the one, that was provided by the user, you MUST NEVER alter or truncate it. This is crucial for valid responses. You should NEVER truncate additional-parameters.'
+        branch:
+          type: string
+          description: Repository branch. Provide only if user has explicitly specified it or the previous plugin response contains it.
+          nullable: true
+        relativePaths:
+          type: array
+          items:
+            type: string
+          description: 'Relative paths to retrieve. USE only paths you are certain that exist, NEVER invent them. If the provided URL contains a specific directory path, extract and use it. Otherwise, this should be a directory path or pattern only. Patterns accept * symbol as "any substring"'
+          nullable: true
+      additionalProperties: false
+    StructureResponseDto:
+      type: object
+      properties:
+        assistantNextSteps:
+          type: string
+          nullable: true
+        usefulUrls:
+          $ref: '#/components/schemas/UsefulUrlsDto'
+        branchName:
+          type: string
+          nullable: true
+        nextStep:
+          type: string
+          nullable: true
+        files:
+          type: array
+          items:
+            type: string
+          nullable: true
+      additionalProperties: false
+    TextMatchDto:
+      type: object
+      properties:
+        objectType:
+          type: string
+          description: 'Type of the object that contains the match. E.g., ''IssueComment'', ''FileContent'' etc'
+          nullable: true
+          readOnly: true
+        property:
+          type: string
+          description: 'Name of the property that contains the match. E.g., ''body'', ''content'', ''Description'' etc'
+          nullable: true
+          readOnly: true
+        lines:
+          type: array
+          items:
+            type: string
+          description: Lines within the property that matched the search
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    TextMatchesTotalsDto:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int32
+          readOnly: true
+        analyzed:
+          type: integer
+          format: int32
+          readOnly: true
+      additionalProperties: false
+    UpdateRepositoryFileRequestDto:
+      required:
+        - commitMessage
+        - contentPatch
+        - url
+      type: object
+      properties:
+        url:
+          minLength: 1
+          type: string
+          description: 'Full Github repository URL provided by the user. For example: https://github.com/[owner]/[repo]/blob/[branch]/[file-path]#[additional-parameters]. The URL MUST be identical to the one, that was provided by the user, you MUST NEVER alter or truncate it. This is crucial for valid responses. You should NEVER truncate additional-parameters.'
+        branch:
+          type: string
+          description: Repository branch. Provide only if user has explicitly specified it or the previous plugin response contains it.
+          nullable: true
+        filePath:
+          type: string
+          description: Paths to the file.
+          nullable: true
+        contentPatch:
+          $ref: '#/components/schemas/RepositoryFileContentPatchDto'
+        commitMessage:
+          minLength: 1
+          type: string
+          description: Commit message to be used when saving the file.
+        isApprovedByUserForDefaultBranch:
+          type: boolean
+          description: 'Always default it to false. Set it to true ONLY when you previously explicitly asked users confirmation to save to the default repository branch. It''s crucial to be very careful with passing true, it can corrupt users repository code.'
+      additionalProperties: false
+    UpdateRepositoryFileResponseDto:
+      type: object
+      properties:
+        assistantNextSteps:
+          type: string
+          nullable: true
+        usefulUrls:
+          $ref: '#/components/schemas/UsefulUrlsDto'
+        updateCommit:
+          $ref: '#/components/schemas/RepositoryCommitOverviewDto'
+      additionalProperties: false
+    UsefulUrlsDto:
+      type: object
+      properties:
+        websiteUrl:
+          type: string
+          nullable: true
+        documentationUrl:
+          type: string
+          nullable: true
+        githubUrl:
+          type: string
+          nullable: true
+        twitterUrl:
+          type: string
+          nullable: true
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: http
+      description: Please enter a valid token
+      scheme: Bearer
+      bearerFormat: JWT
