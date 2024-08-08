@@ -1,7 +1,5 @@
 ### ML/AI Projects 
 
-Completed by @gabrieldeolaguibel
-
 This repository showcases a collection of various applied Machine Learning and Artificial Intelligence projects I have done. 
 
 Each project explores different aspects of ML/AI techniques, demonstrating the implementation and analysis of various models and algorithms in real-world scenarios. The projects span across multiple domains, including natural language processing, computer vision, regression analysis, and unsupervised learning, providing a comprehensive overview of practical applications in data science.
