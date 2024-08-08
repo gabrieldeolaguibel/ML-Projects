@@ -4,8 +4,6 @@ This repository showcases a collection of various applied Machine Learning and A
 
 Each project explores different aspects of ML/AI techniques, demonstrating the implementation and analysis of various models and algorithms in real-world scenarios. The projects span across multiple domains, including natural language processing, computer vision, regression analysis, and unsupervised learning, providing a comprehensive overview of practical applications in data science.
 
-To refine the README with deeper insights into the algorithms and ML techniques used in each project, I'll review the contents of each project. Let me proceed by examining the specific techniques used in each notebook.
-
 ## Featured Projects
 
 ### [Spam Classification with Support Vector Machines (SVM)](https://github.com/gabrieldeolaguibel/ML-Projects/tree/main/Spam_Classification_with_SVM)
