@@ -1,6 +1,10 @@
 import base64
 from openai import OpenAI
 
+'''
+This script is used to extract information from an image of a car accident document in spanish using the OpenAI API
+'''
+
 #open_ai_key = ""
 client = OpenAI(api_key=open_ai_key)
 
@@ -11,7 +15,7 @@ def encode_image(image_path):
 
 
 #path to image
-image_path = "/Users/gabrieldeolaguibel/IE/DevOps_Assignement1/Statistical-Learning-and-Prediction/class_hackathon/parte_amistoso_9_39.jpg"
+image_path = "class_hackathon/parte_amistoso_9_39.jpg"
 
 # getting the base64 encoded image
 base64_image = encode_image(image_path)
